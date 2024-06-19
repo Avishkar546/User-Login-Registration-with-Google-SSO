@@ -1,7 +1,10 @@
 import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
-export const sequelize = new Sequelize('Authentication_System', 'postgres', 'Navodaya@007', {
-    host: 'localhost',
+dotenv.config();
+
+export const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_Host || 'localhost',
     dialect: 'postgres',
     logging: false, // make true if you want to see random SQL queries
 });
@@ -11,6 +14,6 @@ export const connectToDB = async () => {
         await sequelize.authenticate();
         console.log('Database Connection has been established successfully.');
     } catch (error) {
-        console.error('Unable to connect to the database:', error);
+        console.error('Unable to connect to the database:', error.message);
     }
 }
