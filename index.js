@@ -30,6 +30,12 @@ app.get('/logout', function (req, res, next) {
 
 // user route configuration
 app.use("/api/v1/user", router);
+app.get("/", (req, res) => {
+    res.send({
+        status:200,
+        message:"Hello Worlds"
+    })
+})
 
 connectToDB();
 initializeUserModel();
