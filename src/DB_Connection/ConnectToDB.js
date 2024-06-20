@@ -3,12 +3,17 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-    // host: process.env.DB_HOST,
-    host: "localhost",
+export const sequelize = new Sequelize("postgres://hubspot_user_login_user:j7io1NOiKKqDMB5tVOwh3tZjU6Qd9rtv@dpg-cpp93k88fa8c739b93i0-a.oregon-postgres.render.com/hubspot_user_login", {
     port: 5432,
     dialect: 'postgres',
+    protocol: 'postgres',
     logging: false, // make true if you want to see random SQL queries
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false // You might need to tweak this for your SSL settings
+        }
+    }
 });
 
 export const connectToDB = async () => {

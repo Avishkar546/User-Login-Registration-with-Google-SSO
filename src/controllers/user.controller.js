@@ -24,7 +24,6 @@ export const registerController = async (req, res) => {
 
 export const loginController = async (req, res) => {
     try {
-        return res.status(200).send({message:"Hello World"});
         const { email, password } = req.body;
 
         if (!email || !password) {
